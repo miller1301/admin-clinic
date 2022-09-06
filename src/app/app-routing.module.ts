@@ -5,16 +5,23 @@ import { RegisterComponent } from "./auth/register/register.component";
 import { DashboardComponent } from "./pages/dashboard/dashboard.component";
 import { Grafica1Component } from "./pages/grafica1/grafica1.component";
 import { NopagefoundComponent } from "./pages/nopagefound/nopagefound.component";
+import { PagesComponent } from "./pages/pages.component";
 import { ProgressComponent } from "./pages/progress/progress.component";
 
 
 const routes: Routes = [
-    { path: 'dashboard', component: DashboardComponent },
-    { path: 'login', component: LoginComponent },
+    { 
+        path: '', 
+        component: PagesComponent,
+        children: [
+            { path: 'dashboard', component: DashboardComponent },
+            { path: 'progress', component: ProgressComponent },
+            { path: 'grafica1', component: Grafica1Component },
+            { path: '', pathMatch: 'full', redirectTo: '/dashboard' }
+        ]
+    },
     { path: 'register', component: RegisterComponent },
-    { path: 'progress', component: ProgressComponent },
-    { path: 'grafica1', component: Grafica1Component },
-    { path: '', pathMatch: 'full', redirectTo: '/dashboard' },
+    { path: 'login', component: LoginComponent },
     { path: '**', component: NopagefoundComponent },
 ];
 
